@@ -66,7 +66,7 @@ class MockRedis
       yield if block_given?
     end
 
-    def fetch(key, options = {})
+    def fetch(key, options = {})
       []
     end
 
