@@ -7,4 +7,5 @@ require 'mock_redis/misc.rb'
 require 'mock_redis/string.rb'
 require 'mock_redis/set.rb'
 require 'mock_redis/hash.rb'
+require 'mock_redis/zset.rb'
 $:.shift

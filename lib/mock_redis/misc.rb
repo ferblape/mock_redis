@@ -4,6 +4,10 @@ class MockRedis
       @@hash ||= {}
     end
 
+    def scores
+      @@scores ||= {}
+    end
+
     def del(*keys)
       keys.flatten.each do |key|
         self.hash.delete key
@@ -17,11 +21,16 @@ class MockRedis
 
     def type(key)
       case thing = self.hash[key]
-        when nil: "none"
-        when String: "string"
-        when Array: "list"
-        when Set: "set"
-        when Hash: "hash"
+        when nil
+          "none"
+        when String
+          "string"
+        when Array
+          "list"
+        when Set
+          "set"
+        when Hash
+          "hash"
       end
     end
 
@@ -49,6 +58,7 @@ class MockRedis
 
     def flushdb
       self.hash.clear
+      self.scores.clear
     end
     alias flushall flushdb
 
@@ -56,9 +66,14 @@ class MockRedis
       yield if block_given?
     end
 
+    def fetch(key, options = {})
+      []
+    end
+
     def ping
       "PONG"
     end
+
   end
 
   include MiscMethods
